@@ -59,11 +59,19 @@ export default class Piece {
     public singleMove(board: Board, possibleMoves: Array<Array<number>>){
         var currentSquare:Square = board.findPiece(this);
         var availableMoves:Square[] = [];
-        var newLocation:Square;
+        var newSquare:Square;
         for (var move of possibleMoves){
-            newLocation = Square.at(currentSquare.row + move[0], currentSquare.col + move[1]);
-            if (board.isOnBoard(newLocation) && board.isEmpty(newLocation)){
-                availableMoves.push(newLocation);
+            newSquare = Square.at(currentSquare.row + move[0], currentSquare.col + move[1]);
+            if ( board.isOnBoard(newSquare)){
+                if (board.isEmpty(newSquare)){
+                    availableMoves.push(newSquare)
+                }
+                else{
+                    if (board.isTakeable(newSquare)){
+                        availableMoves.push(newSquare)
+                    return(availableMoves)
+                    }
+                }
             }
         }
         return availableMoves;
