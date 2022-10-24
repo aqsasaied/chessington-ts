@@ -11,20 +11,15 @@ export default class Pawn extends Piece {
     public getAvailableMoves(board: Board) {
         var availableMoves:Square[] = [];
         if (this.player == 0){
-            availableMoves = availableMoves.concat(this.singleMove(board, [[1,0]]));
+            var increment = 1
         }
         else{
-            availableMoves = availableMoves.concat(this.singleMove(board, [[-1,0]]));
+            var increment = -1
         }
+        availableMoves = availableMoves.concat(this.singleMove(board, [[increment,0]]));
         if (this.numMoves == 0 && availableMoves.length > 0){
-            if (this.player == 0){
-                availableMoves = availableMoves.concat(this.singleMove(board, [[2,0]]));
-            }
-            else{
-                availableMoves = availableMoves.concat(this.singleMove(board, [[-2,0]]));
-            }
+            availableMoves = availableMoves.concat(this.singleMove(board, [[increment*2,0]]));
         }
-        console.log(availableMoves);
         return availableMoves;
     }
 }

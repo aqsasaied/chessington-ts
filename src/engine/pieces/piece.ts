@@ -61,9 +61,20 @@ export default class Piece {
         else{
             return moves;
         }
-        if ( board.isOnBoard(newSquare) && board.isEmpty(newSquare)){
-            moves.push(newSquare)
-            this.moveDirection(board, direction, moves, newSquare)
+        if ( board.isOnBoard(newSquare)){
+            if (board.isEmpty(newSquare)){
+                moves.push(newSquare)
+                this.moveDirection(board, direction, moves, newSquare)
+            }
+            else{
+                if (board.isTakeable(newSquare)){
+                    moves.push(newSquare)
+                    return(moves)
+                }
+                else{
+                    return(moves)
+                }
+            }
         }
         else{
             return(moves)
