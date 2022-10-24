@@ -17,7 +17,7 @@ export default class Pawn extends Piece {
         else{
             newLocation = Square.at(newLocation.row -= 1, newLocation.col);
         }
-        if (board.isEmpty(newLocation)){
+        if (newLocation.row >= 0 && newLocation.row < 8 && board.isEmpty(newLocation)){
             availableMoves.push(newLocation);
         }
         else{
@@ -31,7 +31,7 @@ export default class Pawn extends Piece {
             else{
                 newLocation = Square.at(newLocation.row -= 2, newLocation.col);
             }
-            if (board.isEmpty(newLocation)){
+            if (newLocation.row >= 0 && newLocation.row < 8 && board.isEmpty(newLocation)){
                 availableMoves.push(newLocation);
             }   
         }

@@ -40,6 +40,9 @@ export default class Bishop extends Piece {
                     newLocation = Square.at(newLocation.row - 1, newLocation.col - 1);
                 }
             }
+            if (!board.isOnBoard(newLocation)){
+                break
+            }
             if (board.getPiece(newLocation) == undefined){
                 moves.push(newLocation);
             }
@@ -50,3 +53,4 @@ export default class Bishop extends Piece {
         return (moves);
     }
 }
+

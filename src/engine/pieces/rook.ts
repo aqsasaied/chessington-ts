@@ -40,6 +40,9 @@ export default class Rook extends Piece {
                     newLocation = Square.at(newLocation.row - 1, newLocation.col);
                 }
             }
+            if (!board.isOnBoard(newLocation)){
+                break
+            }
             if (board.getPiece(newLocation) == undefined){
                 moves.push(newLocation);
             }

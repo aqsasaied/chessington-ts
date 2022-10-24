@@ -49,13 +49,15 @@ export default class Board {
     }
 
     public isOnBoard(square: Square){
-        if (square.row > 0 && square.col > 0 && square.row < GameSettings.BOARD_SIZE - 1 && square.col < GameSettings.BOARD_SIZE - 1){
-        return true;
+        if (square.row >= 0 && square.col >= 0 && square.row < GameSettings.BOARD_SIZE  && square.col < GameSettings.BOARD_SIZE ){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
     public isEmpty(square: Square){
-        console.log(this.getPiece(square));
         if (this.getPiece(square) == undefined){
             return true;
         }
