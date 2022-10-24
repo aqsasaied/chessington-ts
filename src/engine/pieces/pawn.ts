@@ -10,31 +10,21 @@ export default class Pawn extends Piece {
 
     public getAvailableMoves(board: Board) {
         var availableMoves:Square[] = [];
-        var newLocation:Square = board.findPiece(this);
         if (this.player == 0){
-            newLocation = Square.at(newLocation.row += 1, newLocation.col);
+            availableMoves = availableMoves.concat(this.singleMove(board, [[1,0]]));
         }
         else{
-            newLocation = Square.at(newLocation.row -= 1, newLocation.col);
+            availableMoves = availableMoves.concat(this.singleMove(board, [[-1,0]]));
         }
-        if (newLocation.row >= 0 && newLocation.row < 8 && board.isEmpty(newLocation)){
-            availableMoves.push(newLocation);
-        }
-        else{
-            return availableMoves;
-        }
-        newLocation = board.findPiece(this);
-        if (this.numMoves == 0){
+        if (this.numMoves == 0 && availableMoves.length > 0){
             if (this.player == 0){
-                newLocation = Square.at(newLocation.row += 2, newLocation.col);
+                availableMoves = availableMoves.concat(this.singleMove(board, [[2,0]]));
             }
             else{
-                newLocation = Square.at(newLocation.row -= 2, newLocation.col);
+                availableMoves = availableMoves.concat(this.singleMove(board, [[-2,0]]));
             }
-            if (newLocation.row >= 0 && newLocation.row < 8 && board.isEmpty(newLocation)){
-                availableMoves.push(newLocation);
-            }   
         }
+        console.log(availableMoves);
         return availableMoves;
     }
 }

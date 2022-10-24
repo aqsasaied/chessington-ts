@@ -76,7 +76,7 @@ export default class Piece {
         var newLocation:Square;
         for (var move of possibleMoves){
             newLocation = Square.at(currentSquare.row + move[0], currentSquare.col + move[1]);
-            if (board.isOnBoard(newLocation)){
+            if (board.isOnBoard(newLocation) && board.isEmpty(newLocation)){
                 availableMoves.push(newLocation);
             }
         }
