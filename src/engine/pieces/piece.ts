@@ -13,6 +13,10 @@ enum Direction{
     DOWNLEFT, 
     }
 
+type Horizontal = 1|0|-1
+type Vertical = 1|0|-1
+
+
 export default class Piece {
     public player: Player;
     public numMoves: number;
@@ -32,47 +36,18 @@ export default class Piece {
         this.numMoves += 1;
     }
 
-    public moveDirection(board: Board, direction: Direction, moves: Square[], currentSquare: Square){
+    public moveDirection(board: Board, horizontal: Horizontal, vertical: Vertical, moves: Square[], currentSquare: Square){
         var newSquare:Square;
-        if (direction == Direction.UP){
-            newSquare = Square.at(currentSquare.row + 1, currentSquare.col);
-        }
-        else if (direction == Direction.DOWN){
-            newSquare = Square.at(currentSquare.row - 1, currentSquare.col);
-        }
-        else if (direction == Direction.RIGHT){
-            newSquare = Square.at(currentSquare.row, currentSquare.col + 1);
-        }
-        else if (direction == Direction.LEFT){
-            newSquare = Square.at(currentSquare.row, currentSquare.col - 1);
-        }
-        else if (direction == Direction.UPRIGHT){
-            newSquare = Square.at(currentSquare.row + 1, currentSquare.col + 1);
-        }
-        else if (direction == Direction.UPLEFT){
-            newSquare = Square.at(currentSquare.row + 1, currentSquare.col - 1);
-        }
-        else if (direction == Direction.DOWNRIGHT){
-            newSquare = Square.at(currentSquare.row - 1, currentSquare.col + 1);
-        }
-        else if (direction == Direction.DOWNLEFT){
-            newSquare = Square.at(currentSquare.row - 1, currentSquare.col - 1);
-        }
-        else{
-            return moves;
-        }
+        newSquare = Square.at(currentSquare.row + horizontal, currentSquare.col + vertical);
         if ( board.isOnBoard(newSquare)){
             if (board.isEmpty(newSquare)){
                 moves.push(newSquare)
-                this.moveDirection(board, direction, moves, newSquare)
+                this.moveDirection(board, horizontal, vertical, moves, newSquare)
             }
             else{
                 if (board.isTakeable(newSquare)){
                     moves.push(newSquare)
-                    return(moves)
-                }
-                else{
-                    return(moves)
+                return(moves)
                 }
             }
         }

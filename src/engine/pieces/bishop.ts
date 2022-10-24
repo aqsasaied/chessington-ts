@@ -12,10 +12,10 @@ export default class Bishop extends Piece {
 
     public getAvailableMoves(board: Board) {
         var availableMoves:Square[] = [];
-        this.moveDirection(board, 4, availableMoves, board.findPiece(this))
-        this.moveDirection(board, 5, availableMoves, board.findPiece(this))
-        this.moveDirection(board, 6, availableMoves, board.findPiece(this))
-        this.moveDirection(board, 7, availableMoves, board.findPiece(this))
+        this.moveDirection(board, 1,1, availableMoves, board.findPiece(this))
+        this.moveDirection(board, -1,-1, availableMoves, board.findPiece(this))
+        this.moveDirection(board, 1,-1, availableMoves, board.findPiece(this))
+        this.moveDirection(board, -1,1, availableMoves, board.findPiece(this))
         return availableMoves;
 
     }
