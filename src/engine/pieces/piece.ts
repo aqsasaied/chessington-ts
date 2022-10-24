@@ -69,4 +69,17 @@ export default class Piece {
             return(moves)
         }
     }
+
+    public singleMove(board: Board, possibleMoves: Array<Array<number>>){
+        var currentSquare:Square = board.findPiece(this);
+        var availableMoves:Square[] = [];
+        var newLocation:Square;
+        for (var move of possibleMoves){
+            newLocation = Square.at(currentSquare.row + move[0], currentSquare.col + move[1]);
+            if (board.isOnBoard(newLocation)){
+                availableMoves.push(newLocation);
+            }
+        }
+        return availableMoves;
+    }
 }
