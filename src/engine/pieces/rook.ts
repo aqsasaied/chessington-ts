@@ -12,51 +12,48 @@ export default class Rook extends Piece {
 
     public getAvailableMoves(board: Board) {
         var availableMoves:Square[] = [];
-        var newLocation:Square = board.findPiece(this);
-        newLocation = Square.at(newLocation.row + 1, newLocation.col);
-        while (newLocation.row < GameSettings.BOARD_SIZE){
-            if (board.getPiece(newLocation) == undefined){
-                availableMoves.push(newLocation);
-            }
-            else{
-                break
-            }
-            newLocation = Square.at(newLocation.row + 1, newLocation.col);
-        }
-        newLocation = board.findPiece(this);
-        newLocation = Square.at(newLocation.row - 1, newLocation.col);
-        while (newLocation.row >= 0 ){
-            if (board.getPiece(newLocation) == undefined){
-                availableMoves.push(newLocation);
-            }
-            else{
-                break
-            }
-            newLocation = Square.at(newLocation.row - 1, newLocation.col);
-        }
-        newLocation = board.findPiece(this);
-        newLocation = Square.at(newLocation.row, newLocation.col + 1);
-        while (newLocation.col < GameSettings.BOARD_SIZE){
-            if (board.getPiece(newLocation) == undefined){
-                availableMoves.push(newLocation);
-            }
-            else{
-                break
-            }
-            newLocation = Square.at(newLocation.row, newLocation.col + 1);
-        }
-        newLocation = board.findPiece(this);
-        newLocation = Square.at(newLocation.row, newLocation.col - 1);
-        while (newLocation.col >= 0){
-            if (board.getPiece(newLocation) == undefined){
-                availableMoves.push(newLocation);
-            }
-            else{
-                break
-            }
-            newLocation = Square.at(newLocation.row, newLocation.col - 1);
-        }
+        availableMoves = availableMoves.concat(this.checkMoves(board, true, true))
+        availableMoves = availableMoves.concat(this.checkMoves(board, false, true))
+        availableMoves = availableMoves.concat(this.checkMoves(board, true, false))
+        availableMoves = availableMoves.concat(this.checkMoves(board, false, false))
         return availableMoves;
         
+    }
+
+    public checkMoves(board: Board, positive:Boolean, horizontal:Boolean){
+        var moves:Square[] = [];
+        var newLocation:Square = board.findPiece(this);
+        var end:number
+        if (positive){
+            end = GameSettings.BOARD_SIZE - 1
+        }
+        else{
+            end = 0
+        }
+        while (newLocation.row != end && newLocation.col != end){
+            if (positive){
+                if (horizontal){
+                    newLocation = Square.at(newLocation.row , newLocation.col + 1);
+                }
+                else{
+                    newLocation = Square.at(newLocation.row + 1, newLocation.col);
+                }
+            }
+            else{
+                if (horizontal){
+                    newLocation = Square.at(newLocation.row , newLocation.col - 1);
+                }
+                else{
+                    newLocation = Square.at(newLocation.row - 1, newLocation.col);
+                }
+            }
+            if (board.getPiece(newLocation) == undefined){
+                moves.push(newLocation);
+            }
+            else{
+                break;
+            }
+        }
+        return (moves);
     }
 }
