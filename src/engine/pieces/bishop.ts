@@ -24,8 +24,7 @@ export default class Bishop extends Piece {
     public checkMoves(board: Board, up:Boolean, right:Boolean){
         var moves:Square[] = [];
         var newLocation:Square = board.findPiece(this);
-        var end:number
-        while (newLocation.row > 0 && newLocation.col > 0 && newLocation.row < GameSettings.BOARD_SIZE - 1 && newLocation.col < GameSettings.BOARD_SIZE - 1){
+        while (board.isOnBoard(newLocation)){
             if (up){
                 if (right){
                     newLocation = Square.at(newLocation.row + 1, newLocation.col + 1);

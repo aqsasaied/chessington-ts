@@ -23,14 +23,7 @@ export default class Rook extends Piece {
     public checkMoves(board: Board, positive:Boolean, horizontal:Boolean){
         var moves:Square[] = [];
         var newLocation:Square = board.findPiece(this);
-        var end:number
-        if (positive){
-            end = GameSettings.BOARD_SIZE - 1
-        }
-        else{
-            end = 0
-        }
-        while (newLocation.row != end && newLocation.col != end){
+        while (board.isOnBoard(newLocation)){
             if (positive){
                 if (horizontal){
                     newLocation = Square.at(newLocation.row , newLocation.col + 1);
