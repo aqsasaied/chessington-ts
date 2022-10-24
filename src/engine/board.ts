@@ -53,4 +53,14 @@ export default class Board {
         return true;
         }
     }
+
+    public isEmpty(square: Square){
+        console.log(this.getPiece(square));
+        if (this.getPiece(square) == undefined){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
