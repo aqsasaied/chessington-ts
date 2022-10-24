@@ -16,7 +16,6 @@ export default class Bishop extends Piece {
         availableMoves = availableMoves.concat(this.checkMoves(board, false, true))
         availableMoves = availableMoves.concat(this.checkMoves(board, true, false))
         availableMoves = availableMoves.concat(this.checkMoves(board, false, false))
-        console.log(availableMoves);
         return availableMoves;
 
     }
