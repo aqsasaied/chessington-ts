@@ -12,45 +12,13 @@ export default class Bishop extends Piece {
 
     public getAvailableMoves(board: Board) {
         var availableMoves:Square[] = [];
-        availableMoves = availableMoves.concat(this.checkMoves(board, true, true))
-        availableMoves = availableMoves.concat(this.checkMoves(board, false, true))
-        availableMoves = availableMoves.concat(this.checkMoves(board, true, false))
-        availableMoves = availableMoves.concat(this.checkMoves(board, false, false))
+        this.moveDirection(board, 4, availableMoves, board.findPiece(this))
+        this.moveDirection(board, 5, availableMoves, board.findPiece(this))
+        this.moveDirection(board, 6, availableMoves, board.findPiece(this))
+        this.moveDirection(board, 7, availableMoves, board.findPiece(this))
         return availableMoves;
 
     }
 
-    public checkMoves(board: Board, up:Boolean, right:Boolean){
-        var moves:Square[] = [];
-        var newLocation:Square = board.findPiece(this);
-        while (board.isOnBoard(newLocation)){
-            if (up){
-                if (right){
-                    newLocation = Square.at(newLocation.row + 1, newLocation.col + 1);
-                }
-                else{
-                    newLocation = Square.at(newLocation.row + 1, newLocation.col - 1);
-                }
-            }
-            else{
-                if (right){
-                    newLocation = Square.at(newLocation.row - 1, newLocation.col + 1);
-                }
-                else{
-                    newLocation = Square.at(newLocation.row - 1, newLocation.col - 1);
-                }
-            }
-            if (!board.isOnBoard(newLocation)){
-                break
-            }
-            if (board.getPiece(newLocation) == undefined){
-                moves.push(newLocation);
-            }
-            else{
-                break;
-            }
-        }
-        return (moves);
-    }
 }
 

@@ -12,44 +12,11 @@ export default class Rook extends Piece {
 
     public getAvailableMoves(board: Board) {
         var availableMoves:Square[] = [];
-        availableMoves = availableMoves.concat(this.checkMoves(board, true, true))
-        availableMoves = availableMoves.concat(this.checkMoves(board, false, true))
-        availableMoves = availableMoves.concat(this.checkMoves(board, true, false))
-        availableMoves = availableMoves.concat(this.checkMoves(board, false, false))
+        this.moveDirection(board, 0, availableMoves, board.findPiece(this))
+        this.moveDirection(board, 1, availableMoves, board.findPiece(this))
+        this.moveDirection(board, 2, availableMoves, board.findPiece(this))
+        this.moveDirection(board, 3, availableMoves, board.findPiece(this))
         return availableMoves;
         
-    }
-
-    public checkMoves(board: Board, positive:Boolean, horizontal:Boolean){
-        var moves:Square[] = [];
-        var newLocation:Square = board.findPiece(this);
-        while (board.isOnBoard(newLocation)){
-            if (positive){
-                if (horizontal){
-                    newLocation = Square.at(newLocation.row , newLocation.col + 1);
-                }
-                else{
-                    newLocation = Square.at(newLocation.row + 1, newLocation.col);
-                }
-            }
-            else{
-                if (horizontal){
-                    newLocation = Square.at(newLocation.row , newLocation.col - 1);
-                }
-                else{
-                    newLocation = Square.at(newLocation.row - 1, newLocation.col);
-                }
-            }
-            if (!board.isOnBoard(newLocation)){
-                break
-            }
-            if (board.getPiece(newLocation) == undefined){
-                moves.push(newLocation);
-            }
-            else{
-                break;
-            }
-        }
-        return (moves);
     }
 }

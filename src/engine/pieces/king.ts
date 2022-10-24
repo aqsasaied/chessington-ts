@@ -18,7 +18,6 @@ export default class King extends Piece {
                 availableMoves.push(Square.at(newLocation.row + move[0], newLocation.col + move[1]))
             }
         }         
-        console.log(availableMoves)
         return availableMoves;
     }
 }
