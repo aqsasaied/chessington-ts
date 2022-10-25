@@ -10,12 +10,7 @@ export default class Pawn extends Piece {
 
     public getAvailableMoves(board: Board) {
         var availableMoves:Square[] = [];
-        if (this.player == 0){
-            var increment = 1
-        }
-        else{
-            var increment = -1
-        }
+        const increment = this.player === Player.WHITE ? 1 : -1;
         availableMoves = availableMoves.concat(this.singleMove(board, [[increment,0]]));
         if (this.numMoves == 0 && availableMoves.length > 0){
             availableMoves = availableMoves.concat(this.singleMove(board, [[increment*2,0]]));
