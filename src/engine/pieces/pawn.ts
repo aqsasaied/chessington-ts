@@ -16,16 +16,20 @@ export default class Pawn extends Piece {
             availableMoves = availableMoves.concat(this.singleMove(board, [[increment*2,0]]));
         }
         var currentSquare = board.findPiece(this);
-        var d1 = Square.at(currentSquare.row + increment, currentSquare.col + 1);
-        var d2 = Square.at(currentSquare.row + increment, currentSquare.col - 1);
-        if (board.isOnBoard(d1) && !board.isEmpty(d1) && board.isTakeable(d1)){
-            availableMoves.push(d1);
-        }
-        if (board.isOnBoard(d2) && !board.isEmpty(d2) && board.isTakeable(d2)){
-            availableMoves.push(d2);
+        var diagonals = [[increment,1], [increment,-1]];
+        for (var move of diagonals){
+            if (this.takeDiagonal(board, Square.at(currentSquare.row + move[0], currentSquare.col + move[1]))){
+                availableMoves.push(Square.at(currentSquare.row + move[0], currentSquare.col + move[1]));
+            }
         }
         console.log(availableMoves);
         return availableMoves;
     }
 
+    public takeDiagonal(board: Board, square : Square){
+        if (board.isOnBoard(square) && !board.isEmpty(square) && board.isTakeable(square)){
+            return true;
+        }
+        return false;
+    }
 }
