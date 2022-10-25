@@ -3,6 +3,7 @@ import GameSettings from './gameSettings';
 import Square from './square';
 import Piece from './pieces/piece';
 import King from './pieces/king';
+import Queen from './pieces/queen';
 
 export default class Board {
     public currentPlayer: Player;
@@ -73,6 +74,16 @@ export default class Board {
         }
         else{
             return false;
+        }
+    }
+
+    public promotePawn(fromSquare: Square, toSquare: Square){
+        const movingPiece = this.getPiece(fromSquare);
+        const queen = new Queen(this.currentPlayer);    
+        if (!!movingPiece && movingPiece.player === this.currentPlayer) {
+            this.setPiece(toSquare, queen);
+            this.setPiece(fromSquare, undefined);
+            this.currentPlayer = (this.currentPlayer === Player.WHITE ? Player.BLACK : Player.WHITE);
         }
     }
 }

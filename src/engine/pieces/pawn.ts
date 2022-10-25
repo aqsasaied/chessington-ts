@@ -8,6 +8,16 @@ export default class Pawn extends Piece {
         super(player);
     }
 
+    public moveTo(board: Board, newSquare: Square) {
+        const currentSquare = board.findPiece(this);
+        const edge = this.player === Player.WHITE ? 7 : 0;
+        if (newSquare.row == edge){
+            board.promotePawn(currentSquare, newSquare);
+        }
+        board.movePiece(currentSquare, newSquare);
+        this.numMoves += 1;
+    }
+    
     public getAvailableMoves(board: Board) {
         var availableMoves:Square[] = [];
         const increment = this.player === Player.WHITE ? 1 : -1;
@@ -22,7 +32,6 @@ export default class Pawn extends Piece {
                 availableMoves.push(Square.at(currentSquare.row + move[0], currentSquare.col + move[1]));
             }
         }
-        console.log(availableMoves);
         return availableMoves;
     }
 

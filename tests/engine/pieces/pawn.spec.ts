@@ -4,6 +4,7 @@ import Player from '../../../src/engine/player';
 import Square from '../../../src/engine/square';
 import Rook from '../../../src/engine/pieces/rook';
 import King from '../../../src/engine/pieces/king';
+import Queen from '../../../src/engine/pieces/queen';
 
 describe('Pawn', () => {
 
@@ -83,6 +84,16 @@ describe('Pawn', () => {
 
             moves.should.not.deep.include(Square.at(5, 3));
         });
+
+        it('can promote', () => {
+            const pawn = new Pawn(Player.WHITE);
+            const queen = new Queen(Player.WHITE);
+            board.setPiece(Square.at(6, 6), pawn);
+            pawn.moveTo(board, Square.at(7, 6));
+            var piece = board.getPiece(Square.at(7,6));
+            var current = (piece instanceof Queen);
+            current.should.equal((queen instanceof Queen));
+        });
     });
 
     describe('black pawns', () => {
@@ -160,6 +171,16 @@ describe('Pawn', () => {
             const moves = pawn.getAvailableMoves(board);
 
             moves.should.not.deep.include(Square.at(3, 3));
+        });
+
+        it('can promote', () => {
+            const pawn = new Pawn(Player.BLACK);
+            const queen = new Queen(Player.BLACK);
+            board.setPiece(Square.at(1, 2), pawn);
+            pawn.moveTo(board, Square.at(0, 2));
+            var piece = board.getPiece(Square.at(0,2));
+            var current = (piece instanceof Queen);
+            current.should.equal((queen instanceof Queen));
         });
     });
 
